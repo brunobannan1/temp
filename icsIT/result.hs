@@ -5,11 +5,11 @@ data Tree a = Leaf a | Node (Tree a) (Tree a) deriving Show
 threeBiggestWords :: String -> [String]
 threeBiggestWords xs = take 3 $ reverse $ sortOn length $ words xs
 
-listPrint :: Tree String -> String -> [(String,[String])] -> [(String,[String])]
-listPrint (Leaf xs) parent output = [(parent, threeBiggestWords xs)]
-listPrint (Node l r) parent output = (listPrint l (parent ++ "L") output) ++ (listPrint r (parent ++ "R") output)
+listPrint :: Tree String -> String -> [(String,[String])]
+listPrint (Leaf xs) parent = [(parent, threeBiggestWords xs)]
+listPrint (Node l r) parent = (listPrint l (parent ++ "L")) ++ (listPrint r (parent ++ "R"))
 
-printResult tree = listPrint tree "P" [("P",[""])]
+printResult tree = listPrint tree "P"
 
 {- Next lines is a TREEs for test
     USAGE: 
